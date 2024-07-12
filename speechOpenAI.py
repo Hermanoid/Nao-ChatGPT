@@ -6,7 +6,7 @@ from openai import OpenAI
 import json
 import os
 
-
+# code to figure out the microphone indexes for multi-microphone use
 '''
 for index, name in enumerate(sr.Microphone.list_microphone_names()):
     print(f'{index}, {name}')
@@ -15,27 +15,20 @@ for index, name in enumerate(sr.Microphone.list_microphone_names()):
 microphones = sr.Microphone.list_microphone_names()
 for index, name in enumerate(microphones):
   print(f"Microphone with index {index} and name \"{name}\" found")
-
-
 '''
 
 openAIKey = os.environ.get("OPENAI_API_KEY")
 
-
-
 # Initialize the recognizer
 r = sr.Recognizer()
 
-#mic = sr.Microphone(device_index=30)
 # Initialize the OpenAI client
 client = OpenAI(api_key=openAIKey)
 MODEL = "gpt-4o"
 
 chat_history = [{"role": "system", "content": "You are a NAO robot that provides appropiate gestures while answering my questions breifly. Provide the response in this example format: Say something ^start(animations/Stand/Gestures/Hey_1) Say something else. "}]
-with open("C:\\venvProjects\\projectIshani\\flask-server\\X.txt", "w") as f:
+with open("C:\\venvProjects\\projectIshani\\flask-server\\history.txt", "w") as f:
 	json.dump(chat_history,f)
-
-
 	
 def speak(mic,person):
 	print(person, mic)
