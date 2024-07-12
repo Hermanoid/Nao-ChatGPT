@@ -19,9 +19,10 @@ posture_proxy.goToPosture("StandInit", 1.0)
 
 while True:
     try:
-        with open("C:\\venvProjects\\projectIshani\\flask-server\\responseText.txt", "r") as f:
+        with open("C:\\venvProjects\\projectIshani\\flask-server\\response.txt", "r") as f:
             text = f.read().replace('\n', ' ')
-        
+
+        # have the NAO speak ChatGPT's response
         if text != "":
             if text != text_old:
                 animated_speech.say(text)
@@ -30,9 +31,5 @@ while True:
                 
         time.sleep(1)
     except Exception as e:
-        
         print("An error occurred: ", e)
         time.sleep(1)
-
-
-
