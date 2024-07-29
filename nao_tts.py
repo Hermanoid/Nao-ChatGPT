@@ -19,7 +19,7 @@ posture_proxy.goToPosture("StandInit", 1.0)
 
 while True:
     try:
-        with open("C:\\venvProjects\\projectIshani\\flask-server\\response.txt", "r") as f:
+        with open("C:\\path\\to\\your\\folder\\response.txt", "r") as f:
             text = f.read().replace('\n', ' ')
 
         # have the NAO speak ChatGPT's response
