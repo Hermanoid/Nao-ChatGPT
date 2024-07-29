@@ -8,10 +8,6 @@ import os
 
 # code to figure out the microphone indexes for multi-microphone use
 '''
-for index, name in enumerate(sr.Microphone.list_microphone_names()):
-    print(f'{index}, {name}')
-'''
-'''
 microphones = sr.Microphone.list_microphone_names()
 for index, name in enumerate(microphones):
   print(f"Microphone with index {index} and name \"{name}\" found")
@@ -27,7 +23,7 @@ client = OpenAI(api_key=openAIKey)
 MODEL = "gpt-4o"
 
 chat_history = [{"role": "system", "content": "You are a NAO robot that provides appropiate gestures while answering my questions breifly. Provide the response in this example format: Say something ^start(animations/Stand/Gestures/Hey_1) Say something else. "}]
-with open("C:\\venvProjects\\projectIshani\\flask-server\\history.txt", "w") as f:
+with open("C:\\path\\to\\your\\folder\\history.txt", "w") as f:
 	json.dump(chat_history,f)
 	
 def speak(mic,person):
@@ -47,7 +43,7 @@ def speak(mic,person):
 				print("mic " + str(mic) + " " + person + " said: " + text)
 
 				# read current chat history
-				with open("C:\\venvProjects\\projectIshani\\flask-server\\history.txt", "r") as f:
+				with open("C:\\path\\to\\your\\folder\\history.txt", "r") as f:
 					chat_history = json.load(f)
 
 				# keeps the chat history with ChatGPT
@@ -63,10 +59,10 @@ def speak(mic,person):
 				chat_history.append({"role": "assistant", "content": response})
 
 				# Save the updated chat history back to the file
-				with open("C:\\venvProjects\\projectIshani\\flask-server\\history.txt", "w") as f:
+				with open("C:\\path\\to\\your\\folder\\history.txt", "w") as f:
 					json.dump(chat_history, f)
 
-				with open("C:\\venvProjects\\projectIshani\\flask-server\\response.txt", "w") as f:
+				with open("C:\\path\\to\\your\\folder\\response.txt", "w") as f:
 					f.write(response)
 
 			except Exception as e:
@@ -74,3 +70,6 @@ def speak(mic,person):
 				
 		input("press enter to continue")
 		print(person, mic)
+
+# replace the parameters accordingly
+speak(1,"name")
