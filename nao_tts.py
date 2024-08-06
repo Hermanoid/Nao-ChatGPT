@@ -2,34 +2,30 @@ import time
 import naoqi
 from naoqi import ALProxy
 
+
 tts = ALProxy
 
+ip = "10.60.198.90"
+
 # text to speech proxy
-tts = ALProxy("ALTextToSpeech", "10.60.198.90", 9559)
+tts = ALProxy("ALTextToSpeech", ip, 9559)
 
 # animated speech proxy
-animated_speech = ALProxy("ALAnimatedSpeech", "10.60.198.90", 9559)
-text_old = ""
+animated_speech = ALProxy("ALAnimatedSpeech", ip, 9559)
+
 
 # posture proxy
-posture_proxy = ALProxy("ALRobotPosture",  "10.60.198.90", 9559)
+posture_proxy = ALProxy("ALRobotPosture",  ip, 9559)
 
-# Make NAO stand up
-posture_proxy.goToPosture("StandInit", 1.0)
+current_posture = posture_proxy.getPosture()
 
-while True:
-    try:
-        with open("C:\\path\\to\\your\\folder\\response.txt", "r") as f:
-            text = f.read().replace('\n', ' ')
+if current_posture != "Stand":
+    # Make NAO stand up
+    posture_proxy.goToPosture("StandInit", 1.0)
 
-        # have the NAO speak ChatGPT's response
-        if text != "":
-            if text != text_old:
-                animated_speech.say(text)
-                print(text)
-                text_old = text
-                
-        time.sleep(1)
-    except Exception as e:
-        print("An error occurred: ", e)
-        time.sleep(1)
+try:
+    with open("C:\\path\\to\\your\\folder\\response.txt", "r") as f:
+        text = f.read().replace('\n', ' ')
+    animated_speech.say(text)
+except Exception as e:
+    print("An error ocurred: ", e)
