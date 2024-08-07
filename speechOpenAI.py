@@ -23,7 +23,7 @@ client = OpenAI(api_key=openAIKey)
 MODEL = "gpt-4"
 
 chat_history = [{"role": "system", "content": "You are a NAO robot that provides appropiate gestures while answering my questions breifly. Provide the response in this example format: First part of response ^start(animations/Stand/Gestures/Hey_1) second part of response. "}]
-with open("C:\\path\\to\\your\\folder\\history.txt", "w") as f:
+with open("history.txt", "w") as f:
 	json.dump(chat_history,f)
 	
 def speak(mic,person):
@@ -42,7 +42,7 @@ def speak(mic,person):
 				print("mic " + str(mic) + " " + person + " said: " + text)
 
 				# read current chat history
-				with open("C:\\path\\to\\your\\folder\\history.txt", "r") as f:
+				with open("history.txt", "r") as f:
 					chat_history = json.load(f)
 
 				# keeps the chat history with ChatGPT
@@ -58,10 +58,10 @@ def speak(mic,person):
 				chat_history.append({"role": "assistant", "content": response})
 
 				# Save the updated chat history back to the file
-				with open("C:\\path\\to\\your\\folder\\history.txt", "w") as f:
+				with open("history.txt", "w") as f:
 					json.dump(chat_history, f)
 
-				with open("C:\\path\\to\\your\\folder\\response.txt", "w") as f:
+				with open("response.txt", "w") as f:
 					f.write(response)
 
 				while True:
