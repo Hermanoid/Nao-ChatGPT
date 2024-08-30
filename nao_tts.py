@@ -5,13 +5,13 @@ from naoqi import ALProxy
 
 tts = ALProxy
 
-ip = "x.x.x.x"
+ip = "10.60.238.195"
 
 # text to speech proxy
-tts = ALProxy("ALTextToSpeech",ip , 9559)
+tts = ALProxy("ALTextToSpeech", ip, 9559)
 
 # animated speech proxy
-animated_speech = ALProxy("ALAnimatedSpeech",ip, 9559)
+animated_speech = ALProxy("ALAnimatedSpeech", ip, 9559)
 
 # posture proxy
 posture_proxy = ALProxy("ALRobotPosture", ip, 9559)
