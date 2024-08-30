@@ -59,11 +59,11 @@ class HumanGreeter(object):
     def on_arrived(self, value):
         print("Someone arrived: ", value)
         # print(event, id, sub_id)
-        self.tts.say("Howdy, Stranger")
+        self.tts.say("Hi")
         if self.hold_for_response:
             return
         self.tts.say("What is your name?")
-        response = self.wait_for_response("name")
+        response = self.wait_for_response("For this interaction, please return the user's name exactly, with no other text.")
         self.people_names[value] = response
         
         
