@@ -20,6 +20,7 @@ r = sr.Recognizer()
 
 # Initialize the OpenAI client
 client = OpenAI(api_key=openAIKey)
+
 MODEL = "gpt-4o"
 
 chat_history = [
@@ -76,6 +77,7 @@ chat_history = [
  
             Express a mood of playfulness, gentleness, and positivity. However, temper this supportiveness with an amount of firmness; do not downplay the importance of the exercises.
             Be polite and professional, calm yet focused. 
+            With every interaction, you will be given an overview of the user's current mood and energy level. Use this information to tailor your responses to the user's current state. Say things like, "I see you're feeling a bit sad today. Let's work together to make you feel better." or "You seem to have a lot of energy today! Let's use that to our advantage and get started on your exercises."
             
             ----
             
@@ -110,9 +112,14 @@ def speak(mic, person):
                 # read current chat history
                 with open("history.txt", "r") as f:
                     chat_history = json.load(f)
+                
+                # read the most recent mood of the user
+                with open("mood.txt", "r") as f:
+                    mood = f.read()
 
                 # keeps the chat history with ChatGPT
                 chat_history.append({"role": "user", "content": text})
+                chat_history.append({"role": "system", "content": mood})
                 completion = client.chat.completions.create(model=MODEL, messages=chat_history)
                 response = completion.choices[0].message.content
                 print("Assistant: " + response)

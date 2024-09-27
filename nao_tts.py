@@ -16,6 +16,8 @@ animated_speech = ALProxy("ALAnimatedSpeech", ip, 9559)
 # posture proxy
 posture_proxy = ALProxy("ALRobotPosture", ip, 9559)
 
+moodService = ALProxy("ALMood", ip, 9559)
+
 current_posture = posture_proxy.getPosture()
 
 text_old = ""
@@ -31,6 +33,9 @@ with open("listen.txt", "w") as f:
 with open("response.txt", "w") as f:
     f.write(" ")
 
+MOOD_INTERVAL = 4
+LOOP_DELAY = 0.25
+
 while True:
     try:
         with open("response.txt", "r") as f:
@@ -45,7 +50,14 @@ while True:
                 with open("listen.txt", "w") as f:
                     f.write("yes")
                 
-        time.sleep(1)
+        time.sleep(LOOP_DELAY)
+        
+        moooooood = moodService.currentPersonState()
+        moooooood_string = "\n".join([str(key) + ": " + str(value) for key, value in moooooood.items()])
+        
+        with open("mood.txt", "w") as f:
+            f.write(moooooood_string)
+        
     except Exception as e:
         print("An error occurred: ", e)
         time.sleep(1)
