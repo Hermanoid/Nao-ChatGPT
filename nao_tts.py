@@ -5,7 +5,7 @@ from naoqi import ALProxy
 
 tts = ALProxy
 
-ip = "10.60.238.195"
+ip = "10.60.210.179"
 
 # text to speech proxy
 tts = ALProxy("ALTextToSpeech", ip, 9559)
