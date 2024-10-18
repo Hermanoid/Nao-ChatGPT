@@ -8,7 +8,7 @@ import re
 
 tts = ALProxy
 
-ip = "10.60.158.108"
+ip = "138.67.182.99"
 
 # text to speech proxy
 tts = ALProxy("ALTextToSpeech", ip, 9559)
