@@ -65,11 +65,6 @@ def speak(mic, person):
                 # using google to transcribe the audio file to text
                 text = r.recognize_google(audio)
                 print("mic " + str(mic) + " " + person + " said: " + text)
-                # if prompt.strip().lower() == "name":
-                #     print("Name: " + text)
-                #     response = text
-                # else:
-                    # read current chat history
                 with open("history.txt", "r") as f:
                     chat_history = json.load(f)
 
